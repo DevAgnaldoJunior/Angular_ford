@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
     const usuario = localStorage.getItem('usuario');
 
     if (usuario) {
-      this.router.navigate(['/dashboard']);
+      this.router.navigate(['/home']);
     }
   }
 
@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.nome, this.senha).subscribe({
       next: (usuario) => {
         localStorage.setItem('usuario', JSON.stringify(usuario));
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/home']);
       },
       error: (erro) => {
         console.error('Erro no login:', erro);

@@ -1,5 +1,5 @@
 <app-header *ngIf="mostrarHeader"></app-header>
 
-<main class="page-content">
+<main [class.page-content]="mostrarHeader">
   <router-outlet></router-outlet>
 </main>
