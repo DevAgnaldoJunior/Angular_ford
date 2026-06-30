@@ -1,0 +1,134 @@
+<main class="dashboard-page">
+  <header class="dashboard-header">
+    <div>
+      <span class="brand">Ford</span>
+      <h1>Dashboard</h1>
+      <p *ngIf="usuario">Bem-vindo(a), {{ usuario.nome }}</p>
+    </div>
+
+    <button type="button" (click)="sair()">Sair</button>
+  </header>
+
+  <section class="loading" *ngIf="carregando">
+    Carregando dados dos veículos...
+  </section>
+
+  <section class="erro" *ngIf="mensagemErro">
+    {{ mensagemErro }}
+  </section>
+
+  <ng-container *ngIf="!carregando && !mensagemErro">
+    <section class="cards">
+      <article class="card">
+        <span>Total de veículos</span>
+        <strong>{{ totalVeiculos }}</strong>
+      </article>
+
+      <article class="card">
+        <span>Volume total</span>
+        <strong>{{ totalVolume }}</strong>
+      </article>
+
+      <article class="card">
+        <span>Conectados</span>
+        <strong>{{ totalConectados }}</strong>
+      </article>
+
+      <article class="card">
+        <span>Atualizações</span>
+        <strong>{{ totalAtualizacoes }}</strong>
+      </article>
+    </section>
+
+    <section class="vehicle-panel">
+      <div class="vehicle-selector">
+        <h2>Detalhes por veículo</h2>
+
+        <label for="veiculo">Selecione um veículo</label>
+
+        <select
+          id="veiculo"
+          [ngModel]="veiculoSelecionado?.id"
+          (ngModelChange)="selecionarVeiculo($event)"
+        >
+          <option
+            *ngFor="let veiculo of veiculos"
+            [value]="veiculo.id"
+          >
+            {{ veiculo.vehicle }}
+          </option>
+        </select>
+      </div>
+
+      <div class="vehicle-details" *ngIf="veiculoSelecionado">
+  <div class="vehicle-image">
+    <img
+      [src]="veiculoSelecionado.image"
+      [alt]="veiculoSelecionado.vehicle"
+    />
+  </div>
+
+  <div class="vehicle-metrics">
+      <article>
+        <span>Veículo</span>
+        <strong>{{ veiculoSelecionado.vehicle }}</strong>
+      </article>
+
+      <article>
+        <span>Volume total</span>
+        <strong>{{ veiculoSelecionado.volumetotal }}</strong>
+      </article>
+
+      <article>
+        <span>Conectados</span>
+        <strong>{{ veiculoSelecionado.connected }}</strong>
+      </article>
+
+      <article>
+        <span>Atualizações de software</span>
+        <strong>{{ veiculoSelecionado.softwareUpdates }}</strong>
+      </article>
+    </div>
+  </div>
+    </section>
+
+    <section class="table-section">
+      <h2>Lista de veículos</h2>
+
+      <div class="search-box">
+        <input
+          type="text"
+          placeholder="Buscar veículo..."
+          [(ngModel)]="termoBusca"
+          (input)="filtrarVeiculos()"
+        />
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Veículo</th>
+            <th>Volume total</th>
+            <th>Conectados</th>
+            <th>Atualizações</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr
+            *ngFor="let veiculo of veiculosFiltrados"
+            [class.selected]="veiculoSelecionado?.id === veiculo.id"
+            (click)="verDetalhesVeiculo(veiculo.id)"
+          >
+            <td>{{ veiculo.id }}</td>
+            <td>{{ veiculo.vehicle }}</td>
+            <td>{{ veiculo.volumetotal }}</td>
+            <td>{{ veiculo.connected }}</td>
+            <td>{{ veiculo.softwareUpdates }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </ng-container>
+</main>

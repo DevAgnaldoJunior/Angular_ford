@@ -1,0 +1,80 @@
+.home-page {
+  min-height: calc(100vh - 72px);
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.35),
+      rgba(255, 255, 255, 0.35)
+    ),
+    url('/img/ranger.png');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+
+.welcome-card {
+  width: 100%;
+  max-width: 520px;
+  min-height: 280px;
+  background-color: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(0, 52, 120, 0.15);
+  border-radius: 4px;
+  padding: 40px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+}
+
+.tag {
+  display: inline-block;
+  color: #003478;
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.welcome-card h1 {
+  color: #003478;
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.welcome-card p {
+  color: #4f5b6b;
+  font-size: 16px;
+  margin-bottom: 32px;
+}
+
+.home-actions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.btn-dashboard,
+.btn-logout {
+  border: none;
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn-dashboard {
+  background-color: #003478;
+  color: #ffffff;
+}
+
+.btn-dashboard:hover {
+  background-color: #00285c;
+}
+
+.btn-logout {
+  background-color: #e9edf3;
+  color: #003478;
+}
+
+.btn-logout:hover {
+  background-color: #d8dee8;
+}

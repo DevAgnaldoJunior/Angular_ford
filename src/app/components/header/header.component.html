@@ -1,0 +1,24 @@
+<header class="top-header">
+  <button class="hamburger-button" type="button" (click)="abrirMenu()">
+    ☰
+  </button>
+
+  <span class="header-title">Ford Dashboard</span>
+</header>
+
+<div class="menu-overlay" *ngIf="menuAberto" (click)="fecharMenu()"></div>
+
+<aside class="side-menu" *ngIf="menuAberto">
+  <div class="side-menu-header">
+    <h5>Menu</h5>
+
+    <button type="button" class="close-button" (click)="fecharMenu()">
+      ×
+    </button>
+  </div>
+
+  <nav class="side-menu-nav">
+    <a routerLink="/home" (click)="fecharMenu()">Home</a>
+    <a routerLink="/dashboard" (click)="fecharMenu()">Dashboard</a>
+  </nav>
+</aside>

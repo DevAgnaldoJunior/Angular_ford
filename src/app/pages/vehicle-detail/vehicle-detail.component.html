@@ -1,0 +1,44 @@
+<main class="detail-page">
+  <header class="detail-header">
+    <div>
+      <span class="brand">Ford</span>
+      <h1>Detalhes do Veículo</h1>
+    </div>
+
+    <button type="button" (click)="voltar()">Voltar</button>
+  </header>
+
+  <section class="loading" *ngIf="carregando">
+    Carregando detalhes do veículo...
+  </section>
+
+  <section class="erro" *ngIf="mensagemErro">
+    {{ mensagemErro }}
+  </section>
+
+  <section class="vehicle-card" *ngIf="!carregando && !mensagemErro && veiculo">
+    <h2>{{ veiculo.vehicle }}</h2>
+
+    <div class="info-grid">
+      <article>
+        <span>ID</span>
+        <strong>{{ veiculo.id }}</strong>
+      </article>
+
+      <article>
+        <span>Volume total</span>
+        <strong>{{ veiculo.volumetotal }}</strong>
+      </article>
+
+      <article>
+        <span>Veículos conectados</span>
+        <strong>{{ veiculo.connected }}</strong>
+      </article>
+
+      <article>
+        <span>Atualizações de software</span>
+        <strong>{{ veiculo.softwareUpdates }}</strong>
+      </article>
+    </div>
+  </section>
+</main>
