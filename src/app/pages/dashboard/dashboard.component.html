@@ -6,7 +6,6 @@
       <p *ngIf="usuario">Bem-vindo(a), {{ usuario.nome }}</p>
     </div>
 
-    <button type="button" (click)="sair()">Sair</button>
   </header>
 
   <section class="loading" *ngIf="carregando">
@@ -93,39 +92,51 @@
     </section>
 
     <section class="table-section">
-      <h2>Lista de veículos</h2>
+      <h2>Buscar dados do veículo</h2>
 
-      <div class="search-box">
-        <input
-          type="text"
-          placeholder="Buscar veículo..."
-          [(ngModel)]="termoBusca"
-          (input)="filtrarVeiculos()"
-        />
+      <div class="vehicle-code-search">
+        <label for="codigoVeiculo">Código do veículo</label>
+
+        <div class="search-row">
+          <input
+            id="codigoVeiculo"
+            type="text"
+            placeholder="Ex: 2FRHDUYS2Y63NHD22454"
+            [(ngModel)]="codigoVeiculo"
+          />
+
+          <button type="button" (click)="buscarDadosVeiculo()">
+            Buscar
+          </button>
+        </div>
       </div>
 
-      <table>
+      <p class="loading-text" *ngIf="carregandoDadosVeiculo">
+        Buscando dados do veículo...
+      </p>
+
+      <p class="erro" *ngIf="mensagemErroDados">
+        {{ mensagemErroDados }}
+      </p>
+
+      <table *ngIf="dadosVeiculo">
         <thead>
           <tr>
-            <th>ID</th>
-            <th>Veículo</th>
-            <th>Volume total</th>
-            <th>Conectados</th>
-            <th>Atualizações</th>
+            <th>Odômetro</th>
+            <th>Nível de combustível</th>
+            <th>Status</th>
+            <th>Latitude</th>
+            <th>Longitude</th>
           </tr>
         </thead>
 
         <tbody>
-          <tr
-            *ngFor="let veiculo of veiculosFiltrados"
-            [class.selected]="veiculoSelecionado?.id === veiculo.id"
-            (click)="verDetalhesVeiculo(veiculo.id)"
-          >
-            <td>{{ veiculo.id }}</td>
-            <td>{{ veiculo.vehicle }}</td>
-            <td>{{ veiculo.volumetotal }}</td>
-            <td>{{ veiculo.connected }}</td>
-            <td>{{ veiculo.softwareUpdates }}</td>
+          <tr>
+            <td>{{ dadosVeiculo.odometro }}</td>
+            <td>{{ dadosVeiculo.nivelCombustivel }}</td>
+            <td>{{ dadosVeiculo.status }}</td>
+            <td>{{ dadosVeiculo.lat }}</td>
+            <td>{{ dadosVeiculo.long }}</td>
           </tr>
         </tbody>
       </table>

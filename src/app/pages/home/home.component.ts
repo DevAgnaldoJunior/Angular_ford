@@ -10,8 +10,5 @@ import { Router, RouterLink } from '@angular/router';
 export class HomeComponent {
   constructor(private router: Router) {}
 
-  logout(): void {
-    localStorage.removeItem('usuarioLogado');
-    this.router.navigate(['/login']);
-  }
+  
 }

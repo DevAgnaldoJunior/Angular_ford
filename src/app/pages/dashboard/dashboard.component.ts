@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { VehiclesService } from '../../services/vehicles.service';
-import { Veiculo } from '../../models/veiculo.model';
+import { Veiculo, VehicleData } from '../../models/veiculo.model';
 import { Usuario } from '../../models/usuario.model';
 
 @Component({
@@ -29,6 +29,16 @@ export class DashboardComponent implements OnInit {
 
   carregando = true;
   mensagemErro = '';
+
+  
+
+
+  codigoVeiculo: string = '';
+  dadosVeiculo: VehicleData | null = null;
+  carregandoDadosVeiculo: boolean = false;
+  mensagemErroDados: string = '';
+
+
 
   constructor(
     private vehiclesService: VehiclesService,
@@ -143,8 +153,29 @@ export class DashboardComponent implements OnInit {
   });
   }
 
-  sair(): void {
-    localStorage.removeItem('usuario');
-    this.router.navigate(['/login']);
+  buscarDadosVeiculo(): void {
+    if (!this.codigoVeiculo.trim()) {
+      this.mensagemErroDados = 'Informe o código do veículo.';
+      this.dadosVeiculo = null;
+      return;
+    }
+
+    this.carregandoDadosVeiculo = true;
+    this.mensagemErroDados = '';
+    this.dadosVeiculo = null;
+
+    this.vehiclesService.buscarDadosVeiculo(this.codigoVeiculo).subscribe({
+      next: (dados) => {
+        this.dadosVeiculo = dados;
+        this.carregandoDadosVeiculo = false;
+      },
+      error: (erro) => {
+        console.error('Erro ao buscar dados do veículo:', erro);
+        this.mensagemErroDados = 'Não foi possível buscar os dados do veículo.';
+        this.carregandoDadosVeiculo = false;
+      }
+    });
   }
+
+ 
 }
